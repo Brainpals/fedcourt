@@ -1,0 +1,77 @@
+RewriteEngine On 
+RewriteCond %{HTTPS} off 
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L=301]
+RewriteEngine On
+
+RewriteRule ^(RCS)($|/) - [L]
+
+RewriteCond %{REQUEST_URI} !index\.php
+RewriteCond %{REQUEST_URI} !shc_staffLogin\.php
+RewriteCond %{REQUEST_URI} !students_portal\.php
+RewriteCond %{REQUEST_URI} !student_home\.php
+RewriteCond %{REQUEST_URI} !staffLogin\.php
+#RewriteCond %{REQUEST_URI} !modify_upload\.php  [L]
+
+#RewriteCond %{REQUEST_URI} !home/upload\.php  [L]
+#RewriteCond %{REQUEST_URI} !home/corseReg\.php  [L]
+#RewriteBase /
+
+#Show contents if user omit the .php extension
+RewriteCond %{THE_REQUEST} /([^.]+)\.php [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+
+#If user type in the .php extension, forcefully remove it
+RewriteCond %{REQUEST_FILENAME}.php -f
+ErrorDocument 404 /getme/404.php
+RewriteRule ^ %{REQUEST_URI}.php [NC,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^house-for-sale-in-(.*)$ /getme/house-for-sale-in/$1/ [R=301,NC]
+
+RewriteRule ^house-for-rent-in-(.*)$ /getme/house-for-rent-in/$1/ [R=301,NC]
+
+RewriteRule ^land-for-sale-in-(.*)$ /getme/land-for-sale-in/$1/ [R=301,NC]
+
+RewriteRule ^land-for-rent-in-(.*)$ /getme/land-for-rent-in/$1/ [R=301,NC]
+
+RewriteRule ^land-for-sublet-in-(.*)$ /getme/land-for-sublet-in/$1/ [R=301,NC]
+RewriteRule ^house-for-sublet-in-(.*)$ /getme/house-for-sublet-in/$1/ [R=301,NC]
+
+RewriteRule ^off-campus-accommodation-in-(.*)$ /getme/off-campus-accommodation-in/$1/ [R=301,NC]
+
+RewriteRule ^office-space-for-rent-in-(.*)$ /getme/office-space-for-rent-in/$1/ [R=301,NC]
+
+
+RewriteRule ^office-space-for-sale-in-(.*)$ /getme/office-space-for-sale-in/$1/ [R=301,NC]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/agent/$
+RewriteCond %{REQUEST_URI} !^/blog/$
+
+RewriteRule ^([a-zA-Z0-9-_]+)\/([a-zA-Z0-9-_]+)\/([a-zA-Z0-9-_]+$)\/?$ levelthree.php?param=$1&param2=$2&param3=$3 [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/agent/$
+RewriteRule ^([a-zA-Z0-9-_]+)\/([a-zA-Z0-9-_]+)\/?$ levelTwo.php?param=$1&param2=$2&param3=$3 [NC]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/agent/$
+RewriteRule ^([a-zA-Z0-9-_]+)\/?$ levelOne.php?param=$1 [NC]
+
+
+
+
+
+
+
+
+
+
+
+
+
+

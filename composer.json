@@ -1,0 +1,17 @@
+{
+    "name": "brainpals/fedcourt",
+    "autoload": {
+        "psr-4": {
+            "Brainpals\\Fedcourt\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Onyema Famous Emeka",
+            "email": "brainpalstekk@gmail.com"
+        }
+    ],
+    "require": {
+        "phpoffice/phpspreadsheet": "^4.5"
+    }
+}
