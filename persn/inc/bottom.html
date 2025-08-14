@@ -1,0 +1,48 @@
+
+<script src="../vendor/js/bootstrap.bundle.min.js"></script>
+<script src="../vendor/js/select2.min.js"></script>
+<script>
+ $(document).ready(function() {
+  $('.select2-tags').each(function() {
+    const $this = $(this);
+    $this.select2({
+      tags: true,
+      width: '100%',
+      placeholder: "Select or type...",
+      allowClear: true,
+      dropdownParent: $this.closest('.modal') // auto-detect parent modal
+    });
+  });
+});
+
+</script>
+<?php include('modals.php');   ?>
+<script>
+function loadSection(section) {
+  $('#main-content').html('<div class="text-center p-5"><div class="spinner-border text-primary"></div><p>Loading...</p></div>');
+
+  $.ajax({url: section + ".php",
+    method: "GET",
+    success: function(data) {$('#main-content').html(data);
+    },error: function() { $('#main-content').html('<div class="alert alert-danger">Failed to load section.</div>');}});}
+
+
+  // Load the dynamic PHP table
+  $('#main-content').load('datatable.php', function () {
+    $('#example').DataTable({
+      scrollX: true,
+      scrollCollapse: true,
+      paging: true,
+      fixedColumns: {
+        leftColumns: 4
+      }
+    });
+  });
+
+  document.querySelectorAll('.only-numbers').forEach(function(input) {
+    input.addEventListener('input', function() {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+  });
+
+</script>
